@@ -1,7 +1,38 @@
 import { useState } from "react";
 
 export default function DonorRegistration() {
-  const [available, setAvailable] = useState(true);
+  const [available, setAvailable] = useState(false);
+
+  async function formSubmit() {
+    const donarData = {
+      id: document.getElementById("id").value,
+      name: document.getElementById("name").value,
+      age: document.getElementById("age").value,
+      bloodGroup: document.getElementById("bloodGroup").value,
+      location: document.getElementById("location").value,
+      phoneNo: document.getElementById("phoneNo").value,
+      availabilityStatus: available,
+    };
+
+    console.log(donarData);
+
+    try {
+      const res = await fetch(`http://localhost:8000/donar/newDonar`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(donarData),
+      });
+
+      // const result = await res.json();
+
+      // alert(result.result);
+    } catch (err) {
+      console.error("Error:", err);
+      // alert();
+    }
+  }
 
   return (
     <section className="py-12 flex flex-col items-center">
@@ -11,13 +42,27 @@ export default function DonorRegistration() {
       </p>
 
       <form className="bg-white shadow-md rounded-2xl p-8 w-full max-w-lg space-y-6">
+        {/* adhar no as id*/}
+
+        <div>
+          <label className="block text-gray-700 mb-1">ID</label>
+          <input
+            type="number"
+            id="id"
+            placeholder="Enter your Adhar No. as ID"
+            className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          />
+        </div>
         {/* Full Name */}
         <div>
           <label className="block text-gray-700 mb-1">Full Name</label>
           <input
             type="text"
+            id="name"
             placeholder="Enter your full name"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
         </div>
 
@@ -26,15 +71,20 @@ export default function DonorRegistration() {
           <label className="block text-gray-700 mb-1">Age</label>
           <input
             type="number"
+            id="age"
             placeholder="Enter your age"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
         </div>
 
         {/* Blood Group */}
         <div>
           <label className="block text-gray-700 mb-1">Blood Group</label>
-          <select className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <select
+            id="bloodGroup"
+            className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          >
             <option>Select your blood group</option>
             <option>A+</option>
             <option>A-</option>
@@ -52,8 +102,10 @@ export default function DonorRegistration() {
           <label className="block text-gray-700 mb-1">Location</label>
           <input
             type="text"
+            id="location"
             placeholder="Enter your city/area"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
         </div>
 
@@ -61,9 +113,11 @@ export default function DonorRegistration() {
         <div>
           <label className="block text-gray-700 mb-1">Contact Number</label>
           <input
-            type="tel"
+            type="number"
+            id="phoneNo"
             placeholder="Enter your phone number"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
         </div>
 
@@ -101,6 +155,9 @@ export default function DonorRegistration() {
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 hover:shadow-lg transition"
+          onClick={() => {
+            formSubmit();
+          }}
         >
           Register as Donor
         </button>

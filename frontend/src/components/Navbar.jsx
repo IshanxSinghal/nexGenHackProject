@@ -9,13 +9,20 @@ export default function Navbar() {
     { name: "Donor Response", path: "/donor-response" },
     { name: "Dashboard", path: "/dashboard" },
     { name: "Education Bot", path: "/education-bot" },
+    { name: "Hospital Registration ", path: "/hospital-registration" },
   ];
 
   return (
-    <nav className="bg-white shadow-sm px-6 py-3 flex justify-between items-center">
+    <nav className="bg-white shadow-sm px-4 py-3 flex justify-between items-center">
       {/* Logo */}
-      <Link to="/" className="flex items-center gap-2 text-xl font-bold text-blue-600">
-        💙 BloodLink
+      <Link
+        to="/"
+        className="flex items-center gap-1 text-xl font-bold text-red-600"
+      >
+        <span>
+          <img className="size-16" src="public/logo.png" alt="" />
+        </span>
+        BloodCircle
       </Link>
 
       {/* Nav links */}

@@ -2,6 +2,51 @@ import { useState } from "react";
 
 export default function HospitalRequest() {
   const [urgency, setUrgency] = useState("Immediate (Emergency)");
+  const [success, setSuccess] = useState(false);
+  const [requestData, setRequestData] = useState({
+    hospitalName: "",
+    bloodGroup: "",
+    unitOfBlood: "",
+    hospitalLocation: "",
+    urgencyLevel: "",
+    additionalNotes: "",
+  });
+
+  const handleChange = (e) =>
+    setRequestData({ ...requestData, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(
+        "http://localhost:8000/hospital/requestForBlood",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData),
+        }
+      );
+
+      const hospitalData = await res.json();
+      setSuccess(`Message successfully sent`);
+
+      // Set global hospital ID and password
+
+      setRequestData({
+        hospitalName: "",
+        bloodGroup: "",
+        hospitalLocation: "",
+        unitOfBlood: "",
+        urgencyLevel: "",
+        additionalNotes: "",
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // const onClick
+  //
 
   return (
     <section className="py-12 flex flex-col items-center">
@@ -12,13 +57,21 @@ export default function HospitalRequest() {
         Connect with nearby donors quickly and efficiently
       </p>
 
-      <form className="bg-white shadow-md rounded-2xl p-8 w-full max-w-2xl space-y-6">
+      {success && <h3 className="text-green-700 font-extrabold ">{success}</h3>}
+
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded-2xl p-8 w-full max-w-2xl space-y-6"
+      >
         {/* Hospital Name */}
         <div>
           <label className="block text-gray-700 mb-1">Hospital Name</label>
           <input
             type="text"
+            name="hospitalName"
+            value={requestData.hospitalName}
             placeholder="Enter hospital name"
+            onChange={handleChange}
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
           />
         </div>
@@ -26,8 +79,15 @@ export default function HospitalRequest() {
         {/* Blood Group + Units */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-gray-700 mb-1">Blood Group Needed</label>
-            <select className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
+            <label className="block text-gray-700 mb-1">
+              Blood Group Needed
+            </label>
+            <select
+              onChange={handleChange}
+              name="bloodGroup"
+              value={requestData.bloodGroup}
+              className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none "
+            >
               <option>Select blood group</option>
               <option>A+</option>
               <option>A-</option>
@@ -43,7 +103,10 @@ export default function HospitalRequest() {
             <label className="block text-gray-700 mb-1">Units Needed</label>
             <input
               type="number"
+              name="unitOfBlood"
               placeholder="Number of units"
+              value={requestData.unitOfBlood}
+              onChange={handleChange}
               className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
             />
           </div>
@@ -54,6 +117,9 @@ export default function HospitalRequest() {
           <label className="block text-gray-700 mb-1">Hospital Location</label>
           <input
             type="text"
+            onChange={handleChange}
+            value={requestData.hospitalLocation}
+            name="hospitalLocation"
             placeholder="Enter hospital address/area"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
           />
@@ -63,8 +129,10 @@ export default function HospitalRequest() {
         <div>
           <label className="block text-gray-700 mb-1">Urgency Level</label>
           <select
-            value={urgency}
-            onChange={(e) => setUrgency(e.target.value)}
+            // value={urgency}
+            onChange={handleChange}
+            value={requestData.urgencyLevel}
+            name="urgencyLevel"
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
           >
             <option>Immediate (Emergency)</option>
@@ -74,21 +142,16 @@ export default function HospitalRequest() {
           </select>
         </div>
 
-        {/* Contact Person */}
-        <div>
-          <label className="block text-gray-700 mb-1">Contact Person</label>
-          <input
-            type="text"
-            placeholder="Name and phone number"
-            className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
-          />
-        </div>
-
         {/* Additional Notes */}
         <div>
-          <label className="block text-gray-700 mb-1">Additional Notes (Optional)</label>
+          <label className="block text-gray-700 mb-1">
+            Additional Notes (Optional)
+          </label>
           <textarea
             placeholder="Any additional information..."
+            onChange={handleChange}
+            name="additionalNotes"
+            value={requestData.additionalNotes}
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
           />
         </div>
@@ -96,8 +159,8 @@ export default function HospitalRequest() {
         {/* Emergency Priority Banner */}
         {urgency === "Immediate (Emergency)" && (
           <div className="bg-red-100 border border-red-300 text-red-600 p-4 rounded-lg text-sm">
-            <strong>⚠ Emergency Priority:</strong> Your request will be marked as
-            high priority and donors will receive immediate notifications.
+            <strong>⚠ Emergency Priority:</strong> Your request will be marked
+            as high priority and donors will receive immediate notifications.
           </div>
         )}
 

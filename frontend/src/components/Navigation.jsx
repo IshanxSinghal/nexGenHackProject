@@ -7,35 +7,41 @@ const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { 
-      to: "/donor-registration", 
-      label: "Donor Registration", 
+    {
+      to: "/donor-registration",
+      label: "Donor Registration",
       icon: Heart,
-      description: "Register as blood donor"
+      description: "Register as blood donor",
     },
-    { 
-      to: "/hospital-request", 
-      label: "Hospital Request", 
+    {
+      to: "/hospital-request",
+      label: "Hospital Request",
       icon: Hospital,
-      description: "Request blood from hospitals"
+      description: "Request blood from hospitals",
     },
-    { 
-      to: "/donor-response", 
-      label: "Donor Response", 
+    {
+      to: "/donor-response",
+      label: "Donor Response",
       icon: Bell,
-      description: "Respond to blood requests"
+      description: "Respond to blood requests",
     },
-    { 
-      to: "/dashboard", 
-      label: "Dashboard", 
+    {
+      to: "/dashboard",
+      label: "Dashboard",
       icon: BarChart3,
-      description: "AI-powered logistics"
+      description: "AI-powered logistics",
     },
-    { 
-      to: "/education", 
-      label: "Education Bot", 
+    {
+      to: "/education",
+      label: "Education Bot",
       icon: MessageCircle,
-      description: "Learn about blood donation"
+      description: "Learn about blood donation",
+    },
+    {
+      to: "/hospital-registration",
+      label: "Hospital Registration",
+      icon: MessageCircle,
+      description: "Hospital registration form",
     },
   ];
 
@@ -49,7 +55,9 @@ const Navigation = () => {
               <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                 <Heart className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">BloodLink</span>
+              <span className="text-xl font-bold text-foreground">
+                BloodLink
+              </span>
             </NavLink>
           </div>
 
@@ -132,7 +140,9 @@ const Navigation = () => {
                     <Icon className="w-4 h-4" />
                     <div>
                       <div>{item.label}</div>
-                      <div className="text-xs opacity-70">{item.description}</div>
+                      <div className="text-xs opacity-70">
+                        {item.description}
+                      </div>
                     </div>
                   </NavLink>
                 );
