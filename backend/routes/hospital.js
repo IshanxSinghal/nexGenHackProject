@@ -30,23 +30,26 @@ router.post("/hospitalLogin", async (req, res) => {
 router.post("/requestForBlood", async (req, res) => {
   console.log(req.body);
 
-  const data = await donarSchema.find({
-    bloodGroup: req.body.bloodGroup,
-    location: req.body.hospitalLocation,
-  });
+  try {
+    // Find matching donors
+    const matchingDonors = await donarSchema.find({
+      bloodGroup: req.body.bloodGroup,
+      location: req.body.hospitalLocation,
+      availabilityStatus: true // Only available donors
+    });
 
-  console.log(data);
+    console.log(`Found ${matchingDonors.length} matching donors`);
 
-  res.json(req.body);
-});
-router.post("/hospitalLogin", async (req, res) => {
-  console.log(req.body);
-
-  const data = await hospitalSchema.findOne({
-    hospitalId: req.body.hospitalId,
-  });
-
-  res.json(data);
+    // Return both request data and matching donors
+    res.json({
+      request: req.body,
+      matchingDonors: matchingDonors,
+      donorCount: matchingDonors.length
+    });
+  } catch (error) {
+    console.error("Error finding donors:", error);
+    res.status(500).json({ error: "Failed to find matching donors" });
+  }
 });
 
 router.get("/giveHospital/:id", async (req, res) => {

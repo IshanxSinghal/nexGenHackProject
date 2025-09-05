@@ -32,7 +32,7 @@ const Navigation = () => {
       description: "AI-powered logistics",
     },
     {
-      to: "/education",
+      to: "/education-bot",
       label: "Education Bot",
       icon: MessageCircle,
       description: "Learn about blood donation",
@@ -56,7 +56,7 @@ const Navigation = () => {
                 <Heart className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold text-foreground">
-                BloodLink
+                BloodCircle
               </span>
             </NavLink>
           </div>

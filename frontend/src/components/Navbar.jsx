@@ -6,7 +6,7 @@ export default function Navbar() {
   const navItems = [
     { name: "Donor Registration", path: "/donor-registration" },
     { name: "Hospital Request", path: "/hospital-request" },
-    { name: "Donor Response", path: "/donor-response" },
+    { name: "Blood Requests", path: "/donor-response" },
     { name: "Dashboard", path: "/dashboard" },
     { name: "Education Bot", path: "/education-bot" },
     { name: "Hospital Registration ", path: "/hospital-registration" },
@@ -20,7 +20,7 @@ export default function Navbar() {
         className="flex items-center gap-1 text-xl font-bold text-red-600"
       >
         <span>
-          <img className="size-16" src="public/logo.png" alt="" />
+          <img className="size-16" src="/logo.png" alt="BloodCircle Logo" />
         </span>
         BloodCircle
       </Link>

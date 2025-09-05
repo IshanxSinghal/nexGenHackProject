@@ -30,7 +30,7 @@ export default function HowItWorks() {
       <section className="py-20 bg-gray-50">
         {/* Section Title */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold">How BloodLink Works</h2>
+          <h2 className="text-3xl font-bold">How BloodCircle Works</h2>
           <p className="text-gray-600">
             Simple, fast, and secure blood donation coordination
           </p>

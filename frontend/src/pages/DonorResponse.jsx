@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function DonorResponse() {
+  const navigate = useNavigate();
   const [requests, setRequests] = useState([
     {
       id: 1,
@@ -42,9 +44,15 @@ export default function DonorResponse() {
   const handleResponse = (id, action) => {
     const updated = requests.find((req) => req.id === id);
     if (updated) {
-      updated.status = action;
-      setRequests(requests.filter((req) => req.id !== id));
-      setPrevious([updated, ...previous]);
+      if (action === "accepted") {
+        // Navigate to confirmation page with request data
+        navigate("/donor-confirmation", { state: { request: updated } });
+      } else {
+        // Handle decline
+        updated.status = action;
+        setRequests(requests.filter((req) => req.id !== id));
+        setPrevious([updated, ...previous]);
+      }
     }
   };
 

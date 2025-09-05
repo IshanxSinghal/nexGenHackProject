@@ -11,7 +11,7 @@ export default function Hero() {
         className="flex items-center  text-xl font-bold text-red-600 my-0"
       >
         
-          <img className="size-40" id="image" src="public/logo.png" alt="" />
+          <img className="size-40" id="image" src="/logo.png" alt="BloodCircle Logo" />
         
      
       </Link>

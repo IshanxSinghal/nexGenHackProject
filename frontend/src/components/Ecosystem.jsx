@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 // export default function Ecosystem() {
 //     const features = [
 //       {
@@ -111,16 +113,15 @@ export default function Ecosystem() {
                 <h3 className="text-lg font-semibold mt-4">{f.title}</h3>
                 <p className="text-gray-600 mt-2">{f.desc}</p>
               </div>
-              <a
-                href={f.link}
+              <Link
+                to={f.link}
                 className="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
               >
                 Get Started
-              </a>
+              </Link>
             </div>
           ))}
         </div>
       </section>
     );
   }
-  
