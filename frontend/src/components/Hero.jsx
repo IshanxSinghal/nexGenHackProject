@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
 export default function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center text-center py-20 bg-gradient-to-b from-blue-50 to-white">
-      <div className="mb-6">
-        <span className="text-blue-600 text-5xl">💙</span>
-      </div>
-      <h1 className="text-5xl font-bold mb-4">BloodCircle</h1>
+    <section className="flex flex-col items-center justify-center text-center py-20">
+      <nav className=" px-4 py-3 flex justify-between items-center">
+      {/* Logo */}
+      
+      </nav>
+      <Link
+        to="/"
+        className="flex items-center  text-xl font-bold text-red-600 my-0"
+      >
+        
+          <img className="size-40" id="image" src="public/logo.png" alt="" />
+        
+     
+      </Link>
+      <h1 className="text-5xl font-bold mb-4 mt-0" style={{ marginTop: "-40px" }}>BloodCircle</h1>
       <p className="text-lg text-gray-600 max-w-2xl mb-8">
         Smart Blood Donation Matchmaker <br />
         Connecting donors with hospitals instantly. AI-powered logistics,
@@ -16,12 +26,12 @@ export default function Hero() {
       <div className="flex gap-4">
         <Link to="/donor-registration">
           <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2">
-            Continue as donar
+            Continue As Donor
           </button>
         </Link>
         <Link to="/hospital-registration">
           <button className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center gap-2">
-            Continue as Hospital
+            Continue As Hospital
           </button>
         </Link>
       </div>
