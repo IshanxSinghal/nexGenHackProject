@@ -1,7 +1,5 @@
 # 🩸 BloodCircle - AI-Powered Blood Donation Management System
 
-![BloodCircle Logo](frontend/public/logo.png)
-
 **BloodCircle** is a comprehensive, AI-powered blood donation management platform that connects blood donors, hospitals, and blood banks through intelligent matching algorithms and real-time communication. The platform streamlines the entire blood donation process from registration to delivery, while providing valuable health services to donors.
 
 ## 🌟 Features
@@ -102,6 +100,7 @@ nexGenHackProject/
 - MongoDB (local or Atlas)
 - Python (for ML model)
 - Twilio Account (for SMS)
+- Nodemon (for backend development)
 
 ### **Installation**
 
@@ -139,13 +138,13 @@ nexGenHackProject/
    **Backend:**
    ```bash
    cd backend
-   npm start
+   npx nodemon app.js
    ```
    
    **Frontend:**
    ```bash
    cd frontend
-   npm start
+   npm run dev
    ```
 
 6. **Access the Application**
